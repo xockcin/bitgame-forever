@@ -45,3 +45,20 @@ body {
   align-items: center;
   margin: 20px;
 }
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #282c34;
+}
+
+button {
+  padding: 10px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: #282c34;
+  color: white;
+}
