@@ -1,14 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Byte from './components/Byte'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [mainByte, setMainByte] = useState(0)
   return (
     <>
-      0
+      <div className="App">
+        <h1>Bit Game Forever</h1>
+        <div className="byte-container">
+          <Byte value={mainByte} />
+        </div>
+        <div className="controls">
+          <button onClick={() => setMainByte(mainByte + 1)}>Increment</button>
+          <button onClick={() => setMainByte(mainByte - 1)}>Decrement</button>
+          <button onClick={() => setMainByte(0)}>Reset</button>
+        </div>
+      </div>
     </>
   )
 }
