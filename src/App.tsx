@@ -8,11 +8,23 @@ function App() {
   const [mainByte, setMainByte] = useState(0)
   const [stack, setStack] = useState<number[]>([])
   const [bitmoves, setBitmoves] = useState<string[]>(["<", "~", ">"])
+  const [level, setLevel] = useState<number>(1)
 
   return (
     <>
       <div className="App">
-        <h1>Bit Game Forever</h1>
+        <div className='level-container'>
+          <select 
+            value={level}
+            onChange={e => setLevel(+e.target.value)}
+          >
+            <option value="1">{1}</option>
+            <option value="2">{2}</option>
+          </select>
+        </div>
+        <div className="stack-container">
+
+        </div>
         <div className="byte-container">
           <Byte value={mainByte} />
         </div>
