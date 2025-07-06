@@ -7,6 +7,7 @@ import { doBitmove } from './utilities/functions'
 function App() {
   const [mainByte, setMainByte] = useState(0)
   const [stack, setStack] = useState<number[]>([])
+  const [bitmoves, setBitmoves] = useState<string[]>(["<", "~", ">"])
 
   return (
     <>
@@ -16,9 +17,9 @@ function App() {
           <Byte value={mainByte} />
         </div>
         <div className="controls">
-          <button onClick={() => setMainByte(doBitmove(mainByte, "<"))}>{"<"}</button>
-          <button onClick={() => setMainByte(doBitmove(mainByte, "~"))}>{"~"}</button>
-          <button onClick={() => setMainByte(doBitmove(mainByte, ">"))}>{">"}</button>
+          {bitmoves.map(bitmove => (
+            <button onClick={() => setMainByte(doBitmove(mainByte, bitmove))}>{bitmove}</button>)
+          )}
         </div>
       </div>
     </>
