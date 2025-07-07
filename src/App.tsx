@@ -14,6 +14,27 @@ function App() {
     setLevel(newLevel)
   }
 
+  function addToStack(value: number) {
+    setStack(prevStack => [...prevStack, value])
+  }
+
+  function randomBitmove() {
+    const randomIndex = Math.floor(Math.random() * bitmoves.length)
+    return bitmoves[randomIndex]
+  }
+
+  function addToStackWithLevel(value: number, level: number) {
+    let steps = []
+    for (let i = 0; i < level; i++) {
+      steps.push(randomBitmove())
+    }
+    let newValue = value
+    steps.forEach(move => {
+      newValue = doBitmove(newValue, move)
+    })
+    addToStack(newValue)
+  }
+
   function LevelSelector({ levels, onChange }: { levels: number[], onChange: (level: number) => void }) {
     return (
       <select value={level} onChange={e => onChange(+e.target.value)}>
@@ -26,14 +47,18 @@ function App() {
 
   return (
     <>
+      <div className='level-container'>
+        <LevelSelector 
+          levels={[1, 2, 3, 4, 5]} 
+          onChange={handleLevelChange} />
+      </div>
+      <button onClick={() => addToStackWithLevel(mainByte, level)}>
+        add to stack
+      </button>
       <div className="App">
-        <div className='level-container'>
-          <LevelSelector 
-            levels={[1, 2, 3, 4, 5]} 
-            onChange={handleLevelChange} />
-        </div>
+        
         <div className="stack-container">
-
+          <Stack bytes={stack} />
         </div>
         <div className="byte-container">
           <Byte value={mainByte} />
