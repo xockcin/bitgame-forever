@@ -10,17 +10,27 @@ function App() {
   const [bitmoves, setBitmoves] = useState<string[]>(["<", "~", ">"])
   const [level, setLevel] = useState<number>(1)
 
+  function handleLevelChange(newLevel: number) {
+    setLevel(newLevel)
+  }
+
+  function LevelSelector({ levels, onChange }: { levels: number[], onChange: (level: number) => void }) {
+    return (
+      <select value={level} onChange={e => onChange(+e.target.value)}>
+        {levels.map(l => (
+          <option key={l} value={l}>{l}</option>
+        ))}
+      </select>
+    )
+  }
+
   return (
     <>
       <div className="App">
         <div className='level-container'>
-          <select 
-            value={level}
-            onChange={e => setLevel(+e.target.value)}
-          >
-            <option value="1">{1}</option>
-            <option value="2">{2}</option>
-          </select>
+          <LevelSelector 
+            levels={[1, 2, 3, 4, 5]} 
+            onChange={handleLevelChange} />
         </div>
         <div className="stack-container">
 
