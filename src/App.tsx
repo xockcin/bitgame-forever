@@ -57,7 +57,6 @@ function App() {
         add to stack
       </button>
       <div className="App">
-        
         <div className="stack-container">
           <Stack bytes={stack} />
         </div>
