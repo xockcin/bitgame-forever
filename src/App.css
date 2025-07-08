@@ -57,7 +57,7 @@ body {
   background-color: #282c34;
 }
 
-button {
+button, select {
   padding: 10px 20px;
   border: 1px solid white;
   border-radius: 5px;
@@ -70,4 +70,11 @@ button {
   flex-direction: column-reverse;
   align-items: center;
   gap: 1px;
+}
+
+.level-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }

@@ -32,7 +32,7 @@ function App() {
 
   function addToStackWithLevel() {
     let steps = []
-    for (let i = 0; i < level + 1; i++) {
+    for (let i = 0; i < level; i++) {
       steps.push(randomBitmove())
     }
     let newValue = stack.length ? stack[stack.length - 1] : mainByte
@@ -44,15 +44,13 @@ function App() {
 
   useEffect(() => {
     popStackIfMatch()
-  }, [mainByte])
+  }, [mainByte, stack])
 
   return (
     <>
-      <div className='level-container'>
-        <LevelSelector 
-          levels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} 
-          onChange={handleLevelChange} />
-      </div>
+      <LevelSelector 
+        levels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} 
+        onChange={handleLevelChange} />
       <button onClick={addToStackWithLevel}>
         add to stack
       </button>
