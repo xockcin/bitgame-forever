@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Byte from './components/Byte'
 import Stack from './components/Stack'
+import LevelSelector from './components/LevelSelect'
 import { doBitmove } from './utilities/functions'
 
 function App() {
@@ -14,6 +15,12 @@ function App() {
     setLevel(newLevel)
   }
 
+  function popStackIfMatch() {
+    if (stack[0] === mainByte) {
+      setStack(prevStack => prevStack.slice(1))
+    } 
+  }
+
   function addToStack(value: number) {
     setStack(prevStack => [...prevStack, value])
   }
@@ -23,36 +30,30 @@ function App() {
     return bitmoves[randomIndex]
   }
 
-  function addToStackWithLevel(value: number, level: number) {
+  function addToStackWithLevel() {
     let steps = []
-    for (let i = 0; i < level; i++) {
+    for (let i = 0; i < level + 1; i++) {
       steps.push(randomBitmove())
     }
-    let newValue = value
+    let newValue = stack.length ? stack[stack.length - 1] : mainByte
     steps.forEach(move => {
       newValue = doBitmove(newValue, move)
     })
     addToStack(newValue)
   }
 
-  function LevelSelector({ levels, onChange }: { levels: number[], onChange: (level: number) => void }) {
-    return (
-      <select value={level} onChange={e => onChange(+e.target.value)}>
-        {levels.map(l => (
-          <option key={l} value={l}>{l}</option>
-        ))}
-      </select>
-    )
-  }
+  useEffect(() => {
+    popStackIfMatch()
+  }, [mainByte])
 
   return (
     <>
       <div className='level-container'>
         <LevelSelector 
-          levels={[1, 2, 3, 4, 5]} 
+          levels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} 
           onChange={handleLevelChange} />
       </div>
-      <button onClick={() => addToStackWithLevel(mainByte, level)}>
+      <button onClick={addToStackWithLevel}>
         add to stack
       </button>
       <div className="App">
